@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pshapz", "pshapz\pshapz.csproj", "{EC77CD21-CD43-498A-BAD7-3E26DCC53838}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{1BC0F5A3-B13C-402D-A0EA-D473C5C52467}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{EC77CD21-CD43-498A-BAD7-3E26DCC53838}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC77CD21-CD43-498A-BAD7-3E26DCC53838}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC77CD21-CD43-498A-BAD7-3E26DCC53838}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BC0F5A3-B13C-402D-A0EA-D473C5C52467}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BC0F5A3-B13C-402D-A0EA-D473C5C52467}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BC0F5A3-B13C-402D-A0EA-D473C5C52467}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BC0F5A3-B13C-402D-A0EA-D473C5C52467}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

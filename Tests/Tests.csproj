@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EC77CD21-CD43-498A-BAD7-3E26DCC53838}</ProjectGuid>
+    <ProjectGuid>{1BC0F5A3-B13C-402D-A0EA-D473C5C52467}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>pshapz</RootNamespace>
-    <AssemblyName>pshapz</AssemblyName>
+    <RootNamespace>Tests</RootNamespace>
+    <AssemblyName>Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -31,10 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,21 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BO\FileContext.cs" />
-    <Compile Include="BO\InMemoryContext.cs" />
-    <Compile Include="BO\PerimeterResolver.cs" />
-    <Compile Include="DTO\FormulaDefinition.cs" />
-    <Compile Include="DTO\Measure.cs" />
-    <Compile Include="BO\InMemoryRegistrationContainer.cs" />
-    <Compile Include="DTO\OperationSequence.cs" />
-    <Compile Include="DTO\Sequence.cs" />
-    <Compile Include="DTO\ShapeRegistration.cs" />
-    <Compile Include="Interfaces\IDataContext.cs" />
-    <Compile Include="Interfaces\IRegistrationContainer.cs" />
+    <Compile Include="GeometricShapesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\pshapz\pshapz.csproj">
+      <Project>{ec77cd21-cd43-498a-bad7-3e26dcc53838}</Project>
+      <Name>pshapz</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
