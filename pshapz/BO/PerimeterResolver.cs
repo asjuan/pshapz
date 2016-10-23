@@ -31,9 +31,13 @@ namespace pshapz.BO
     public static decimal ApplyFormula(FormulaDefinition perimeterFormula, List<decimal> values)
     {
       var stack = GetStack(perimeterFormula, values);
-      foreach (var step in perimeterFormula.Sequence.Where(o => o.OperationType == OperationSequence.Sums))
+      foreach (var step in perimeterFormula.Sequence.Where(o => o.OperationType != OperationSequence.Asignation))
       {
-        stack[1] = stack[0] + stack[1];
+        var last = stack.Count() - 1;
+        if (step.OperationType == OperationSequence.Sums)
+        {
+          stack[last - 1] = stack[last - 1] + stack[last];
+        }
         stack = RePopulate(stack);
       }
       return stack[0];
@@ -42,7 +46,7 @@ namespace pshapz.BO
     private static List<decimal> RePopulate(List<decimal> stack)
     {
       var list = new List<decimal>();
-      for (var i = 1; i < stack.Count(); i++)
+      for (var i = 0; i < stack.Count() - 1; i++)
       {
         list.Add(stack[i]);
       }
