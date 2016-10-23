@@ -5,11 +5,19 @@ namespace pshapz.BO
 {
   public class FileContext : IDataContext
   {
+    
+    private FileRegistrationContainer _registration;
+
+    public FileContext()
+    {
+      _registration = new FileRegistrationContainer(@"d:\shapes.json");
+    }
+
     public IRegistrationContainer ShapeRegistration
     {
       get
       {
-        throw new NotImplementedException();
+        return _registration;
       }
 
       set

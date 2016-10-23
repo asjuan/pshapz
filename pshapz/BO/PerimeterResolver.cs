@@ -1,7 +1,6 @@
 ﻿using pshapz.DTO;
 using pshapz.Interfaces;
 using System.Linq;
-using System;
 using System.Collections.Generic;
 
 namespace pshapz.BO
@@ -34,13 +33,18 @@ namespace pshapz.BO
       foreach (var step in perimeterFormula.Sequence.Where(o => o.OperationType != OperationSequence.Asignation))
       {
         var last = stack.Count() - 1;
-        if (step.OperationType == OperationSequence.Sums)
-        {
-          stack[last - 1] = stack[last - 1] + stack[last];
-        }
+        SumIt(stack, step, last);
         stack = RePopulate(stack);
       }
       return stack[0];
+    }
+
+    private static void SumIt(List<decimal> stack, Sequence step, int last)
+    {
+      if (step.OperationType == OperationSequence.Sums)
+      {
+        stack[last - 1] = stack[last - 1] + stack[last];
+      }
     }
 
     private static List<decimal> RePopulate(List<decimal> stack)
