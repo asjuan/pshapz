@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pshapz", "pshapz\pshapz.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{1BC0F5A3-B13C-402D-A0EA-D473C5C52467}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "geomcalc", "geomcalc\geomcalc.csproj", "{48DCEE40-53C6-4F4D-B43A-C68BB435C602}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1BC0F5A3-B13C-402D-A0EA-D473C5C52467}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BC0F5A3-B13C-402D-A0EA-D473C5C52467}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BC0F5A3-B13C-402D-A0EA-D473C5C52467}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48DCEE40-53C6-4F4D-B43A-C68BB435C602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48DCEE40-53C6-4F4D-B43A-C68BB435C602}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48DCEE40-53C6-4F4D-B43A-C68BB435C602}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48DCEE40-53C6-4F4D-B43A-C68BB435C602}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
