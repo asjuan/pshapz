@@ -9,12 +9,14 @@ namespace geomcalc
 {
   class Program
   {
+    private const string ExitCode = "e";
+
     static void Main(string[] args)
     {
       IDataContext context = new InMemoryContext();
       Init(context);
       var option = string.Empty;
-      while (!option.Equals("4"))
+      while (!option.Equals(ExitCode))
       {
         PrintMenu();
         option = Console.ReadLine();
@@ -34,7 +36,16 @@ namespace geomcalc
         var formula = folulas[int.Parse(formulaId) - 1];
         Console.WriteLine($"{formula.Name}");
         var steps = formula.Formulation;
-
+        var list = new List<decimal>();
+        foreach(var step in steps.Where(o=>o.OperationType== OperationSequence.Asignation))
+        {
+          Console.WriteLine($"==={step.Literal.Description}===");
+          Console.Write($"{step.Literal.Literal} = ");
+          var l = Console.ReadLine();
+          list.Add(decimal.Parse(l));
+        }
+        var result = PerimeterResolver.ApplyFormula(PerimeterResolver.GetFormula(context, int.Parse(formulaId) - 1), list);
+        Console.WriteLine($"***The result is {result}***");
       }
     }
 
@@ -45,29 +56,25 @@ namespace geomcalc
         var list = new List<Sequence>();
         Console.WriteLine("Enter name for that formula:");
         var formulaName = Console.ReadLine();
+        Console.WriteLine("  Options:");
+        Console.WriteLine("  +  To perform addition");
+        Console.WriteLine("  x  To requiere a variable");
+        Console.WriteLine($"  {ExitCode}. Exit Step");
         var formulaMenu = string.Empty;
-        while (!formulaMenu.Equals("4"))
+        while (!formulaMenu.Equals(ExitCode))
         {
-          Console.WriteLine("  Options:");
-          Console.WriteLine("  1. Add Step");
-          Console.WriteLine("  4. Exit Step");
           formulaMenu = Console.ReadLine();
-          if (formulaMenu.Equals("1"))
+          if (formulaMenu.Equals("+"))
           {
-            Console.WriteLine("  Type: x to enter variable and + to sum");
-            formulaMenu = Console.ReadLine();
-            if (formulaMenu.Equals("+"))
-            {
-              list.Add(new Sequence { OperationType = OperationSequence.Sums });
-            }
-            if (formulaMenu.Equals("x"))
-            {
-              Console.WriteLine("Enter a description for that variable");
-              var xName = Console.ReadLine();
-              Console.WriteLine("Enter short name for that literal");
-              var lName = Console.ReadLine();
-              list.Add(new Sequence { OperationType = OperationSequence.Asignation, Literal = new Measure { Literal = lName, Description = xName } });
-            }
+            list.Add(new Sequence { OperationType = OperationSequence.Sums });
+          }
+          if (formulaMenu.Equals("x"))
+          {
+            Console.WriteLine("Enter a description for that variable");
+            var xName = Console.ReadLine();
+            Console.WriteLine("Enter short name for that literal");
+            var lName = Console.ReadLine();
+            list.Add(new Sequence { OperationType = OperationSequence.Asignation, Literal = new Measure { Literal = lName, Description = xName } });
           }
         }
         context.ShapeRegistration.Save(new ShapeRegistration { Name = formulaName, Formulation = list });
@@ -85,18 +92,15 @@ namespace geomcalc
           var item = list[i];
           Console.WriteLine($"{i + 1}.- {item.Name}");
         }
-        Console.WriteLine("----------------------");
+        Console.WriteLine("--Available Formulas--");
       }
     }
 
     private static void PrintMenu()
     {
       Console.WriteLine("Geometric Calculator");
-      Console.WriteLine("1. List formulas");
-      Console.WriteLine("2. Add formula");
-      Console.WriteLine("3. Select formula");
-      Console.WriteLine("4. Exit");
-      Console.WriteLine("Type a number:");
+      Console.WriteLine($"1. List formulas | 2. Add formula |3. Select formula | {ExitCode}. Exit");
+      Console.Write("Type a number:");
     }
 
     private static void Init(IDataContext context)
