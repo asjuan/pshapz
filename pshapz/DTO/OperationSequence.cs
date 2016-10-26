@@ -4,6 +4,8 @@
   {
     Asignation,
     Sums,
-    Constant
+    Constant,
+    Times,
+    PowerOf2
   }
 }

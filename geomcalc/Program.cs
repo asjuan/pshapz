@@ -37,14 +37,14 @@ namespace geomcalc
         Console.WriteLine($"{formula.Name}");
         var steps = formula.Formulation;
         var list = new List<decimal>();
-        foreach(var step in steps.Where(o=>o.OperationType== OperationSequence.Asignation))
+        foreach (var step in steps.Where(o => o.OperationType == OperationSequence.Asignation))
         {
           Console.WriteLine($"==={step.Literal.Description}===");
           Console.Write($"{step.Literal.Literal} = ");
           var l = Console.ReadLine();
           list.Add(decimal.Parse(l));
         }
-        var result = PerimeterResolver.ApplyFormula(PerimeterResolver.GetFormula(context, int.Parse(formulaId) - 1), list);
+        var result = Resolver.ApplyFormula(Resolver.GetFormula(context, int.Parse(formulaId) - 1), list);
         Console.WriteLine($"***The result is {result}***");
       }
     }
@@ -58,7 +58,10 @@ namespace geomcalc
         var formulaName = Console.ReadLine();
         Console.WriteLine("  Options:");
         Console.WriteLine("  +  To perform addition");
-        Console.WriteLine("  x  To requiere a variable");
+        Console.WriteLine("  *  To perform multiplication");
+        Console.WriteLine("  p  To apply power of 2");
+        Console.WriteLine("  y  To requiere a variable");
+        Console.WriteLine("  c  To require a constant value");
         Console.WriteLine($"  {ExitCode}. Exit Step");
         var formulaMenu = string.Empty;
         while (!formulaMenu.Equals(ExitCode))
@@ -68,7 +71,25 @@ namespace geomcalc
           {
             list.Add(new Sequence { OperationType = OperationSequence.Sums });
           }
-          if (formulaMenu.Equals("x"))
+          if (formulaMenu.Equals("*"))
+          {
+            list.Add(new Sequence { OperationType = OperationSequence.Times });
+          }
+          if (formulaMenu.Equals("p"))
+          {
+            list.Add(new Sequence { OperationType = OperationSequence.PowerOf2 });
+          }
+          if (formulaMenu.Equals("c"))
+          {
+            Console.WriteLine("Enter a constant value, ie, pi = 3.14159");
+            var constValue = Console.ReadLine();
+            list.Add(new Sequence
+            {
+              OperationType = OperationSequence.Constant,
+              ConstantValue = decimal.Parse(constValue)
+            });
+          }
+          if (formulaMenu.Equals("y"))
           {
             Console.WriteLine("Enter a description for that variable");
             var xName = Console.ReadLine();

@@ -4,6 +4,6 @@
   {
     public Measure Literal { get; set; }
     public OperationSequence OperationType { get; set; }
-    public int ConstantValue { get; set; }
+    public decimal ConstantValue { get; set; }
   }
 }

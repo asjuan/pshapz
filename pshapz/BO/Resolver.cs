@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace pshapz.BO
 {
-  public class PerimeterResolver
+  public class Resolver
   {
 
     public static FormulaDefinition GetFormula(IDataContext _context, int pos)
@@ -15,7 +15,7 @@ namespace pshapz.BO
       var nparameters = 0;
       v.Formulation.ForEach(o =>
       {
-        if (o.OperationType == OperationSequence.Asignation)
+        if (IsMember(o))
         {
           nparameters += 1;
         }
@@ -27,14 +27,24 @@ namespace pshapz.BO
       };
     }
 
+    private static bool IsMember(Sequence o)
+    {
+      return o.OperationType == OperationSequence.Asignation || o.OperationType == OperationSequence.Constant;
+    }
+
     public static decimal ApplyFormula(FormulaDefinition perimeterFormula, List<decimal> values)
     {
       var stack = GetStack(perimeterFormula, values);
-      foreach (var step in perimeterFormula.Sequence.Where(o => o.OperationType != OperationSequence.Asignation))
+      foreach (var step in perimeterFormula.Sequence.Where(o => !IsMember(o)))
       {
         var last = stack.Count() - 1;
         SumIt(stack, step, last);
-        stack = RePopulate(stack);
+        MultiplyIt(stack, step, last);
+        PowerOf2(stack, step, last);
+        if (step.OperationType != OperationSequence.PowerOf2)
+        {
+          stack = RePopulate(stack);
+        }
       }
       return stack[0];
     }
@@ -44,6 +54,22 @@ namespace pshapz.BO
       if (step.OperationType == OperationSequence.Sums)
       {
         stack[last - 1] = stack[last - 1] + stack[last];
+      }
+    }
+
+    private static void MultiplyIt(List<decimal> stack, Sequence step, int last)
+    {
+      if (step.OperationType == OperationSequence.Times)
+      {
+        stack[last - 1] = stack[last - 1] * stack[last];
+      }
+    }
+
+    private static void PowerOf2(List<decimal> stack, Sequence step, int last)
+    {
+      if (step.OperationType == OperationSequence.PowerOf2)
+      {
+        stack[last] = stack[last] * stack[last];
       }
     }
 
@@ -61,10 +87,17 @@ namespace pshapz.BO
     {
       var stack = new List<decimal>();
       var pos = 0;
-      foreach (var step in perimeterFormula.Sequence.Where(o => o.OperationType == OperationSequence.Asignation))
+      foreach (var step in perimeterFormula.Sequence.Where(IsMember))
       {
-        stack.Add(values[pos]);
-        pos++;
+        if (step.OperationType == OperationSequence.Constant)
+        {
+          stack.Add(step.ConstantValue);
+        }
+        else
+        {
+          stack.Add(values[pos]);
+          pos++;
+        }
       }
       return stack;
     }

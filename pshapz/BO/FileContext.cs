@@ -10,7 +10,7 @@ namespace pshapz.BO
 
     public FileContext()
     {
-      _registration = new FileRegistrationContainer(@"d:\tmp\shapes.json");
+      _registration = new FileRegistrationContainer(@"shapes.json");
     }
 
     public IRegistrationContainer ShapeRegistration

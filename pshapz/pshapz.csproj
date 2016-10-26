@@ -48,7 +48,7 @@
     <Compile Include="BO\FileContext.cs" />
     <Compile Include="BO\FileRegistrationContainer.cs" />
     <Compile Include="BO\InMemoryContext.cs" />
-    <Compile Include="BO\PerimeterResolver.cs" />
+    <Compile Include="BO\Resolver.cs" />
     <Compile Include="DTO\FormulaDefinition.cs" />
     <Compile Include="DTO\Measure.cs" />
     <Compile Include="BO\InMemoryRegistrationContainer.cs" />

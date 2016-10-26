@@ -33,18 +33,18 @@ namespace Tests
     [TestMethod]
     public void ShouldResolvePerimeterOfEquilateralTriangle()
     {
-      var perimeterFormula = PerimeterResolver.GetFormula(_context, 0);
+      var perimeterFormula = Resolver.GetFormula(_context, 0);
       var numberOfParams = perimeterFormula.NumberOfParameters;
       var values = GetValuesForParametersFromUI(numberOfParams);
-      var perimeter = PerimeterResolver.ApplyFormula(perimeterFormula, values);
+      var perimeter = Resolver.ApplyFormula(perimeterFormula, values);
       Assert.AreEqual(perimeter, 3);
     }
 
     [TestMethod]
     public void ShouldResolvePerimeterOfOtherTriangle()
     {
-      var perimeterFormula = PerimeterResolver.GetFormula(_context, 0);
-      var perimeter = PerimeterResolver.ApplyFormula(perimeterFormula, new List<decimal> { 1, 2, 2.23M });
+      var perimeterFormula = Resolver.GetFormula(_context, 0);
+      var perimeter = Resolver.ApplyFormula(perimeterFormula, new List<decimal> { 1, 2, 2.23M });
       Assert.AreEqual(perimeter, 5.23M);
     }
 
